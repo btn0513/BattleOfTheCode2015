@@ -1,1 +1,0 @@
-# BattleOfTheCode2015
