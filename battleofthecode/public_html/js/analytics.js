@@ -5,12 +5,15 @@ gapi.analytics.ready(function() {
    * If no access has been created, render an authorize button inside the
    * element with the ID "embed-api-auth-container".
    */
-  gapi.analytics.auth.authorize({
-    container: 'embed-api-auth-container',
-    clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
-  });
 
+  function authorize(){
+    gapi.analytics.auth.authorize({
+      container: 'embed-api-auth-container',
+      clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
+    });
+  }
 
+  authorize();
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
@@ -19,6 +22,38 @@ gapi.analytics.ready(function() {
   var viewSelector = new gapi.analytics.ViewSelector({
     container: 'view-selector-container'
   });
+
+  /**
+   * Create a new ActiveUsers instance to be rendered inside of an
+   * element with the id "active-users-container" and poll for changes every
+   * five seconds.
+   */
+  var activeUsers = new gapi.analytics.ext.ActiveUsers({
+    container: 'active-users-container',
+    pollingInterval: 5
+  });
+
+
+  /**
+   * Add CSS animation to visually show the when users come and go.
+   */
+  activeUsers.once('success', function() {
+    var element = this.container.firstChild;
+    var timeout;
+
+    this.on('change', function(data) {
+      var element = this.container.firstChild;
+      var animationClass = data.delta > 0 ? 'is-increasing' : 'is-decreasing';
+      element.className += (' ' + animationClass);
+
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        element.className =
+            element.className.replace(/ is-(increasing|decreasing)/g, '');
+      }, 3000);
+    });
+  });
+
 
 
 
@@ -213,6 +248,11 @@ gapi.analytics.ready(function() {
     dataChart.set({query: {ids: ids}}).execute();
     pageViewsData.set({query: {ids: ids}}).execute();
     dwData.set({query: {ids: ids}}).execute();
+
+    // Start tracking active users for this view.
+    activeUsers.set({ids: ids}).execute();
+
+
 
     // Render all the of charts for this view.
     renderDayOfWeekChart(ids);
