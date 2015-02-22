@@ -5,6 +5,7 @@
 	background-color:blue;
 	display:block;
 	width:auto;
+	font-size: 18;
 }
 
 .Header-auth a {
@@ -12,14 +13,14 @@
 	text-decoration:none;
 	border-radius: 4px;	
 	border: 1px solid gray;
-	font-size: 12;
-	font-family: Arial;
+	font-size: 14;
+	font-family: 'Consolas', 'Menlo', monospace, serif;
 	color:white;
 	padding: 5px;
 }
 
 .Header-auth .gapi-analytics-auth-styles-signinbutton {
-	background:#f7991c;
+	background:green;
 	display:block;
 	padding:1em 1.5em;
 	-webkit-transition:background-color .2s cubic-bezier(.4,0,.2,1);
@@ -29,9 +30,105 @@
 
 .Header-auth .gapi-analytics-auth-styles-signinbutton:hover {
 	background:#f05721;
-	cursor:pointer
+	cursor:pointer;
 }
 
- .Header-logout a:hover {
+.Header-logout a:hover {
 	background-color:#f7991c;
 }
+
+/**** Dashboard ****/
+.Dashboard {
+	display: block;
+	padding:1.5em;
+	position:relative;
+	margin: 0 auto;
+	visibility: hidden;
+	width: 70%;
+}
+
+.LineGrid {
+	visibility: hidden;
+}
+
+#Site.is-authorized .LineGrid {
+	visibility: visible;
+}
+
+#view-selector-container, #active-users-container, #average-session-container {
+	background:hsla(0,0%,100%,0.3);
+	border:1px solid hsla(0,0%,0%,0.3);
+	border-radius:4px;
+	margin: 30px;
+	padding: 20px;
+	display: inline-block;
+	font-family: 'Consolas', 'Menlo', monospace, serif;
+	font-size: 16;
+}
+
+#view-selector-container table {
+	float:left;
+    display:inline;
+    width: 240px;
+}
+
+#Site.is-authorized .Dashboard {
+	background:#fff;
+	border-color:#d4d2d0;
+	min-height:0;
+	position:static;
+	visibility: visible;
+}
+
+.FlexGrid{
+	display:-webkit-box;
+	display:-webkit-flex;
+	display:-ms-flexbox;
+	display:flex;
+	-webkit-flex-wrap:wrap;
+	-ms-flex-wrap:wrap;
+	flex-wrap:wrap;
+	list-style:none;
+	margin:0 0 -1.5em -1.5em;
+	padding:0
+}
+
+.FlexGrid-item{
+	-webkit-box-flex:1;
+	-webkit-flex:1 0 -webkit-calc(100% - 1.5em);
+	-ms-flex:1 0 calc(100% - 1.5em);
+	flex:1 0 calc(100% - 1.5em);
+	margin:0 0 1.5em 1.5em
+}
+
+.FlexGrid-item{
+	-webkit-flex-basis:360px;
+	-ms-flex-preferred-size:360px;
+	flex-basis:360px;
+	margin:0 0 2em 2em
+}
+
+#users-chart-container, #pageviews-chart-container, #day-of-week-chart, #day-of-week-chart2 {
+	background:hsla(0,0%,100%,0.3);
+	border:1px solid hsla(0,0%,0%,0.3);
+	border-radius:4px;
+	margin: 20px;
+	padding: 50px;
+}
+/**** Titles ****/
+.Titles {
+	font-weight:300;
+	letter-spacing:-.03em;
+	line-height:1.2;
+	margin:0 0 1.5em;
+	word-spacing:.2em
+}
+
+.Titles-main, .Titles-sub {
+	font-family: 'Consolas', 'Menlo', monospace, serif;
+	margin:0
+}
+
+.Titles-main { font-size:1.4em }
+
+.Titles-sub { opacity:.6; margin-top:.2em }

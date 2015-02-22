@@ -1,5 +1,9 @@
 gapi.analytics.ready(function() {
 
+  // Add a state class to the body when auth is successful.
+  gapi.analytics.auth.on('success', function() {
+    document.getElementById("Site").classList.add('is-authorized');  
+  });
   /**
    * Authorize the user immediately if the user has already granted access.
    * If no access has been created, render an authorize button inside the
