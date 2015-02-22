@@ -24,12 +24,15 @@
         <!-- Charts -->
         <div id="users-chart-container"></div>
 		<div id="pageviews-chart-container"></div>
+        <div id="gender-chart-container"></div>
+        <div id="seshD-chart-container"></div>
+        
 
         <!-- Selectors -->
 
         <div id="view-selector-container"></div>
         
-
+        <script src="js/vendor/jquery.1.11.min.js"></script>
 		<script>
 		(function(w,d,s,g,js,fs){
 		  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};

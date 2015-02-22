@@ -11,6 +11,7 @@ gapi.analytics.ready(function() {
   });
 
 
+
   /**
    * Create a new ViewSelector instance to be rendered inside of an
    * element with the id "view-selector-container".
@@ -44,19 +45,8 @@ gapi.analytics.ready(function() {
   });
 
 
-  /**
-   * Render the dataChart on the page whenever a new view is selected.
-   */
-  viewSelector.on('change', function(ids) {
-    dataChart.set({query: {ids: ids}}).execute();
-    pageViewsData.set({query: {ids: ids}}).execute();
-  });
-
-   // Render the view selector to the page.
-  viewSelector.execute();
 
   /*************************Page Views Chart*****************************/
-
 
 
 
@@ -82,6 +72,18 @@ gapi.analytics.ready(function() {
   });
 
 
+  
+  /**
+   * Render the dataChart on the page whenever a new view is selected.
+   */
+  viewSelector.on('change', function(ids) {
+    dataChart.set({query: {ids: ids}}).execute();
+    pageViewsData.set({query: {ids: ids}}).execute();
+    //sessionDuration.set({query: {ids: ids}}).execute();
+  });
+
+   // Render the view selector to the page.
+  viewSelector.execute();
 
 
 });
