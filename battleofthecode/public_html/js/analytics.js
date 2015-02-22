@@ -207,7 +207,7 @@ function getSessionDuration(ids){
       };
 
       new Chart(makeCanvas('day-of-week-chart')).Bar(data);
-      generateLegend('day-of-week-chart2-legend', data.datasets);
+      generateLegend('day-of-week-chart-legend', data.datasets);
     })
     .catch(function(err) {
       console.error(err.stack);
@@ -297,8 +297,8 @@ function getSessionDuration(ids){
         ]
       };
 
-      new Chart(makeCanvas('userType-chart')).Line(data)
-      .generateLegend('userType-chart-legend', data.datasets);
+      new Chart(makeCanvas('userType-chart')).Line(data);
+      generateLegend('userType-chart-legend', data.datasets);
     })
     .catch(function(err) {
       console.error(err.stack);

@@ -44,7 +44,7 @@
 	position:relative;
 	margin: 0 auto;
 	visibility: hidden;
-	width: 70%;
+	width: 60%;
 }
 
 .LineGrid {
@@ -69,7 +69,6 @@
 #view-selector-container table {
 	float:left;
     display:inline;
-    width: 240px;
 }
 
 #Site.is-authorized .Dashboard {
@@ -108,7 +107,7 @@
 	margin:0 0 2em 2em
 }
 
-#users-chart-container, #pageviews-chart-container, #day-of-week-chart, #day-of-week-chart2 {
+#users-chart-container, #pageviews-chart-container, #day-of-week-chart, #userType-chart {
 	background:hsla(0,0%,100%,0.3);
 	border:1px solid hsla(0,0%,0%,0.3);
 	border-radius:4px;
