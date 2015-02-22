@@ -6,6 +6,8 @@
             
 
             <form action="actions.php" method="POST" id="loginform">
+                <input type="hidden" name="table" value="person"/>
+                <input type="hidden" name="crud" value="create"/>
                 <label> Email: <input type="text" name="email" ng-model="email"/></label><br>
                 <label> Password: <input type="password" name="password" /></label><br>
                 <input id="loginbtn" type="submit" value="Log in">
