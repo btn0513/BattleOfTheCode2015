@@ -1,20 +1,12 @@
-#mainpage{
+#Mainpage{
     background-color: blue;
-    height:100px;
-    width:100%
 }
-#map{
+#gmap{
     background-color: red;
-    height:100px;
-    width:100%
 }
-#subloc{
+#sublocations{
     background-color: green;
-    height:100px;
-    width:100%
 }
 #gaapi{
     background-color: yellow;
-    height:100px;
-    width:100%
 }
