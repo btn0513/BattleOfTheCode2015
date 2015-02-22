@@ -12,7 +12,7 @@ gapi.analytics.ready(function() {
       clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
     });
   }
-  authorize();
+
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
@@ -206,6 +206,98 @@ function getSessionDuration(ids){
   }
 
   /**
+   * Draw the a chart.js bar chart with data from the specified view that
+   * overlays session data for the current year over session data for the
+   * previous year, grouped by month.
+   */
+  function renderUserTypeChart(ids) {
+
+    // Adjust `now` to experiment with different days, for testing only...
+    var now = moment(); // .subtract(3, 'day');
+
+    var queryData = query({
+      'ids': ids,
+      'dimensions': 'ga:date',
+      'metrics': 'ga:users',
+      //'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
+      'start-date':'30daysAgo',
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    var queryData2 = query({
+      'ids': ids,
+      'dimensions': 'ga:date',
+      'metrics': 'ga:newUsers',
+      'start-date':'30daysAgo',
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    Promise.all([queryData,queryData2]).then(function(results) {
+      var data1 = results[0].rows.map(function(row) { return +row[1]; });
+      var data2 = results[1].rows.map(function(row) { return +row[1]; });
+
+      var labels = results[1].rows.map(function(row) { return +row[0]; });
+
+
+      $.each(labels,function(key,value){
+          if(key%2 === 0){
+            labels[key] = "";
+          }
+          else{
+            var num = value;
+            var string = value.toString();
+            var date = moment(string,"YYYYMMDD");
+            labels[key]= date.format('MM/DD');
+
+          }
+      });
+
+      console.log("labels",labels);
+
+      $.each(data1,function(key,value){
+
+        data1[key] = this - data2[key];
+      });
+
+      // Ensure the data arrays are at least as long as the labels array.
+      // Chart.js bar charts don't (yet) accept sparse datasets.
+      for (var i = 0, len = labels.length; i < len; i++) {
+        if (data1[i] === undefined) data1[i] = null;
+      }
+      
+            
+
+      var data = {
+        labels : labels,
+        datasets : [
+          {
+            label: 'Returning Users',
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            data : data1
+          },
+          {
+            label: 'New Users',
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            data : data2
+          }
+        ]
+      };
+
+      new Chart(makeCanvas('userType-chart')).Line(data);
+      //generateLegend('day-of-week-chart2-legend', data.datasets);
+    })
+    .catch(function(err) {
+      console.error(err.stack);
+    })
+  }
+
+  /**
    * Extend the Embed APIs `gapi.analytics.report.Data` component to
    * return a promise the is fulfilled with the value returned by the API.
    * @param {Object} params The request parameters.
@@ -266,7 +358,7 @@ function getSessionDuration(ids){
   viewSelector.on('change', function(ids) {
     dataChart.set({query: {ids: ids}}).execute();
     pageViewsData.set({query: {ids: ids}}).execute();
-    dwData.set({query: {ids: ids}}).execute();
+    //dwData.set({query: {ids: ids}}).execute();
 
     // Start tracking active users for this view.
     activeUsers.set({ids: ids}).execute();
@@ -275,6 +367,7 @@ function getSessionDuration(ids){
 
     // Render all the of charts for this view.
     renderDayOfWeekChart(ids);
+    renderUserTypeChart(ids);
 
   });
 
