@@ -1,5 +1,24 @@
+<link href="css/dashboard-style.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Open+Sans:600,400,300' rel='stylesheet'>
 
 <div id="Site">
+	<!-- Linking JavaScipt files here -->
+	<script>
+	(function(w,d,s,g,js,fs){
+	  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+	  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+	  js.src='https://apis.google.com/js/platform.js';
+	  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+	}(window,document,'script'));
+	</script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="js/vendor/Chart.min.js"></script>
+	<script src="js/vendor/moment.min.js"></script>
+	<script src="js/vendor/active-users.js"></script>
+	<script src="js/analytics.js"></script>
+
 
 	<!-- Authorization banner -->
 	<aside class="Header-auth">
@@ -17,17 +36,17 @@
 	  <div id="view-selector-container"></div>
 	  <div id="active-users-container"></div>
 	  <div id="average-session-container"></div>
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primary">
-            <input type="radio" name="options" id="option1" autocomplete="off" value="1" >Daily
+        <!-- <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary" id="daily">
+            <input type="radio" name="options"  autocomplete="off" value="1" >Daily
           </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="options" id="option2" autocomplete="off" value="7">Weekly
+          <label class="btn btn-primary" id="weekly">
+            <input type="radio" name="options"  autocomplete="off" value="7">Weekly
           </label>
-          <label class="btn btn-primary active">
-            <input type="radio" name="options" id="option3" autocomplete="off" value="30" checked>Monthly
+          <label class="btn btn-primary active" id="monthly">
+            <input type="radio" name="options"  autocomplete="off" value="30" checked>Monthly
           </label>
-        </div>  
+        </div>   -->
 	</div>
 
 	<!-- Charts -->
@@ -58,10 +77,9 @@
         <li class="FlexGrid-item">
           <header class="Titles">
             <h1 class="Titles-main">New vs. Returning Visitors</h1>
-            <div class="Titles-sub" id="userType-chart-legend">pv</div>
+            <div id="userType-chart-legend"></div>
           </header>
           <div id="userType-chart"></div>
-          <div ></div>
         </li>
 	  </ul>  
 	</div>

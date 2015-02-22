@@ -18,10 +18,21 @@ gapi.analytics.ready(function() {
   }
   authorize();
 
+  var start_date = moment().subtract(1,'month');
 
-  $('.btn-group input').on('click', function () {
-    alert("dfasfs");
-  })
+  //   $("#weekly").on('click', function () {
+  //     alert("cool");
+  //   });
+
+  //   $("#monthly").on('click', function () {
+  //     alert("cool");
+  //   });
+
+  //   $("#daily").on('click', function () {
+  //     alert("cool");
+  //   });
+
+    
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
@@ -70,7 +81,7 @@ gapi.analytics.ready(function() {
     query: {
       metrics: 'ga:users',
       dimensions: 'ga:date',
-      'start-date': '30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': 'yesterday'
     },
     chart: {
@@ -93,7 +104,7 @@ gapi.analytics.ready(function() {
     query: {
       metrics: 'ga:pageviews',
       dimensions: 'ga:date',
-      'start-date': '30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': 'yesterday'
     },
     chart: {
@@ -115,7 +126,7 @@ gapi.analytics.ready(function() {
     query: {
       metrics: 'ga:pageviews',
       dimensions: 'ga:dayOfWeek',
-      'start-date': '30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': 'yesterday'
     },
     chart: {
@@ -134,7 +145,7 @@ function getSessionDuration(ids){
     queryData =  query({
         'ids': ids,
         'metrics':'ga:avgSessionDuration',
-        'start-date':'30daysAgo',
+        'start-date': start_date.format('YYYY-MM-DD'),
         'end-date': moment(now).format('YYYY-MM-DD')
       });
 
@@ -178,7 +189,7 @@ function getSessionDuration(ids){
       'dimensions': 'ga:dayOfWeek',
       'metrics': 'ga:pageviews',
       //'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
-      'start-date':'30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': moment(now).format('YYYY-MM-DD')
     });
 
@@ -229,7 +240,7 @@ function getSessionDuration(ids){
       'dimensions': 'ga:date',
       'metrics': 'ga:users',
       //'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
-      'start-date':'30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': moment(now).format('YYYY-MM-DD')
     });
 
@@ -237,7 +248,7 @@ function getSessionDuration(ids){
       'ids': ids,
       'dimensions': 'ga:date',
       'metrics': 'ga:newUsers',
-      'start-date':'30daysAgo',
+      'start-date': start_date.format('YYYY-MM-DD'),
       'end-date': moment(now).format('YYYY-MM-DD')
     });
 
