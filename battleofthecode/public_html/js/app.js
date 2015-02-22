@@ -22,6 +22,10 @@ phonecatApp.config(['$routeProvider',
         templateUrl: 'views/gaanalytics.html',
         controller: 'GACtrl'
       }).
+      when('/contact', {
+        templateUrl: 'views/footer.html',
+        controller: 'ContactCtrl'
+      }).
               
               
               
