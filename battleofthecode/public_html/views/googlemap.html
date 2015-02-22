@@ -8,10 +8,14 @@
         <ul >
         <li ng-repeat="locs in mainlocs | filter:query">
           {{locs.name}}
-          <p>{{locs.info}}</p>
+          <p>{{locs.info}}
+              <input type="button" 
+                     onclick="window.location.href='#/subloc/{{locs.sid}}'" value="Go!"> 
+          </p>
+                    
         </li>
       </ul>
-             <map center="39.066814,-94.583535" zoom="12">
+      <map center="39.066814,-94.583535" zoom="12">
         <info-window id="1" position="39.040677,-94.574427" visible="true">
           <div ng-non-bindable="">
             The Anita B Gorman Discovery & Conservation Center!<br>

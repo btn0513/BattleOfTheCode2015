@@ -15,7 +15,7 @@ phonecatApp.config(['$routeProvider',
         templateUrl: 'views/googlemap.html',
         controller: 'MainMapCtrl'
       }).
-      when('/subloc', {
+      when('/subloc/:sid', {
         templateUrl: 'views/sublocations.html',
         controller: 'SubMapCtrl'
       }).
