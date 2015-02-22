@@ -3,7 +3,7 @@ require 'dbcommands.php';
 
 if($_POST["table"]="person"){
     if($_POST["crud"]="create"){
-        if(empty(getUserID($_POST["email"]))){
+        if( getUserID($_POST["email"])!="" ){
             createUser($_POST["email"],$_POST["password"]);
         }
     }else if($_POST["crud"]="read"){

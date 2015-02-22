@@ -89,14 +89,16 @@ echo json_encode($resp);
 require 'util.php';
 // connect MySQl and DB
 require 'dbConn.php';
+
+            createUser("asdf","asdfasdf");
 //createUser("test@gmail.com","123456");
-getUserID("test@yahoo.com");
+/*getUserID("test@yahoo.com");
 //createCheckin(2,1,'2015-02-20 04:01:00');
 listLichensOnEmail("test@yahoo.com");
 getVisitorsForEachSub();
 getVisitorsForEachMain();
 getMainLocs();
-
+*/
 // close connection
-mysql_close();
+//mysql_close();
 ?>
