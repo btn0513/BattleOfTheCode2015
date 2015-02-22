@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QRCode Test</title>
+
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+
+  <script src="js/scanqr/grid.js"></script>
+  <script src="js/scanqr/version.js"></script>
+  <script src="js/scanqr/detector.js"></script>
+  <script src="js/scanqr/formatinf.js"></script>
+  <script src="js/scanqr/errorlevel.js"></script>
+  <script src="js/scanqr/bitmat.js"></script>
+  <script src="js/scanqr/datablock.js"></script>
+  <script src="js/scanqr/bmparser.js"></script>
+  <script src="js/scanqr/datamask.js"></script>
+  <script src="js/scanqr/rsdecoder.js"></script>
+  <script src="js/scanqr/gf256poly.js"></script>
+  <script src="js/scanqr/gf256.js"></script>
+  <script src="js/scanqr/decoder.js"></script>
+  <script src="js/scanqr/qrcode.js"></script>
+  <script src="js/scanqr/findpat.js"></script>
+  <script src="js/scanqr/alignpat.js"></script>
+  <script src="js/scanqr/databr.js"></script>
+  <script src="js/scanqr/query-string.js"></script>
+
+  <style>
+    body {
+      font: 14px/1.2 "Lucida Grande", Helvetica, Arial, sans-serif;
+      padding: 20px;
+    }
+    input[type=text],
+    textarea {
+      width: 100%;
+      resize: none;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-family: Courier;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 1px solid red;
+    }
+    .image-container {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>HTML5 QR Code Reader</h1>
+  <p>
+    <input type="file" accept="image/*" capture="camera" id="input">
+  </p>
+  <form id="result">
+    <fieldset>
+      <legend>Result</legend>
+      <p>
+        <label for="url">URL</label>
+        <textarea id="url" rows="2" wrap="hard" readonly></textarea>
+      </p>
+    </fieldset>
+  </form>
+
+  <div class="image-container">
+    <img src="" id="image">
+  </div>
+
+  <script src="js/scanqr/test.js"></script>
+</body>
+</html>
