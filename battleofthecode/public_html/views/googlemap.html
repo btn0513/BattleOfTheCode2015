@@ -1,5 +1,4 @@
 
-
 <section class="row">
         <div class="col-full">
             <h2>Map of Lichen Geocaches</h2>
@@ -9,8 +8,8 @@
         <li ng-repeat="locs in mainlocs | filter:query">
           {{locs.name}}
           <p>{{locs.info}}
-              <input type="button" 
-                     onclick='window.location.href="#/subloc/2"' value="Go!"> 
+              <input id="gogo" type="button" 
+                     onclick='window.location.href="#/subloc/2?name=reggie"' value="Go!"> 
           </p>
                     
         </li>

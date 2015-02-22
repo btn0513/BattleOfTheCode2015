@@ -9,6 +9,5 @@ if($_POST["table"]="person"){
     }else if($_POST["crud"]="read"){
         createUser($_POST["email"],$_POST["pass"]);
     }
-}if($_POST["table"]="visited"){
-    
 }
+header('Location: http://http://23.254.128.69/urban/#map?name='.$_POST["email"]);
