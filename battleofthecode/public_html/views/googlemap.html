@@ -1,6 +1,9 @@
-
-
-<section id="gmap" class="row">
+<style>
+    p,input{
+        color:black;
+    }
+</style>
+<section class="row">
         <div class="col-full">
             <h2>Map of Lichen geocaches</h2>
         </div>
@@ -8,9 +11,10 @@
         <ul >
         <li ng-repeat="locs in mainlocs | filter:query">
           {{locs.name}}
-          <p>{{locs.info}}
-              <input type="button" 
-                     onclick='window.location.href="#/subloc/2"' value="Go!"> 
+          <p>{{}}
+        <center><input type="button" 
+                       onclick='window.location.href="#/subloc/2"' value="Go!"></center>
+                
           </p>
                     
         </li>
@@ -18,26 +22,22 @@
       <map center="39.066814,-94.583535" zoom="12">
         <info-window id="1" position="39.040677,-94.574427" visible="true">
           <div ng-non-bindable="">
-            The Anita B Gorman Discovery & Conservation Center!<br>
-            LatLng: {{chicago.lat()}}, {{chicago.lng()}}, <br>
-            World Coordinate: {{worldCoordinate.x}}, {{worldCoordinate.y}}, <br>
-            Pixel Coordinate: {{pixelCoordinate.x}}, {{pixelCoordinate.y}}, <br>
-            Tile Coordinate: {{tileCoordinate.x}}, {{tileCoordinate.y}} at Zoom Level {{map.getZoom()}}
+            <p>The Anita B Gorman Discovery & Conservation Center!<br></p>
           </div>
         </info-window>
         <info-window id="1" position="39.094057,-94.604697" visible="true">
           <div ng-non-bindable="">
-            Plug Projects!
+            <p>Plug Projects!</p>
           </div>
         </info-window>
         <info-window id="1" position="39.085255,-94.586066" visible="true">
           <div ng-non-bindable="">
-            Union Station & Science City!
+            <p>Union Station & Science City!</p>
           </div>
         </info-window>
         <info-window id="1" position="39.088249,-94.585216" visible="true">
           <div ng-non-bindable="">
-            The Mid-America Arts Alliance!
+              <p>The Mid-America Arts Alliance!</p>
           </div>
         </info-window>
                  
