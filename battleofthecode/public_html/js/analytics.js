@@ -12,7 +12,6 @@ gapi.analytics.ready(function() {
       clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
     });
   }
-
   authorize();
 
   /**
@@ -33,7 +32,6 @@ gapi.analytics.ready(function() {
     pollingInterval: 5
   });
 
-
   /**
    * Add CSS animation to visually show the when users come and go.
    */
@@ -53,10 +51,6 @@ gapi.analytics.ready(function() {
       }, 3000);
     });
   });
-
-
-
-
 
   /**
    * Create a new DataChart instance with the given query parameters
@@ -79,13 +73,7 @@ gapi.analytics.ready(function() {
     }
   });
 
-
-
-
-
   /*************************Page Views Chart*****************************/
-
-
 
   /**
    * Create a new DataChart instance with the given query parameters
@@ -107,7 +95,6 @@ gapi.analytics.ready(function() {
       }
     }
   });
-
 
    /*************************Days of the Week Chart*****************************/
     /**
@@ -131,8 +118,6 @@ gapi.analytics.ready(function() {
     }
   });
 
-
-
   //Query for average session duration
 function getSessionDuration(ids){
     var now = moment();
@@ -144,7 +129,6 @@ function getSessionDuration(ids){
         'end-date': moment(now).format('YYYY-MM-DD')
       });
 
-
       Promise.all([queryData]).then(function(results){
         var duration = 0;
 
@@ -152,9 +136,6 @@ function getSessionDuration(ids){
           $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
 
         data1 = results[0].rows.map(function(row) { return +row[0]; });
-
-        
-
 
         try{
           data1[0] === undefined ? duration = 0 : duration = data1[0];
@@ -169,10 +150,7 @@ function getSessionDuration(ids){
           $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
         }
 
-        
       });
-
-      
 
   }
 
@@ -194,8 +172,6 @@ function getSessionDuration(ids){
       'start-date':'30daysAgo',
       'end-date': moment(now).format('YYYY-MM-DD')
     });
-
-
 
     Promise.all([queryData]).then(function(results) {
       var data1 = results[0].rows.map(function(row) { return +row[1]; });
@@ -229,7 +205,6 @@ function getSessionDuration(ids){
     })
   }
 
-
   /**
    * Extend the Embed APIs `gapi.analytics.report.Data` component to
    * return a promise the is fulfilled with the value returned by the API.
@@ -244,7 +219,6 @@ function getSessionDuration(ids){
           .execute();
     });
   }
-
 
   /**
    * Create a new canvas inside the specified element. Set it to be the width
@@ -265,7 +239,6 @@ function getSessionDuration(ids){
     return ctx;
   }
 
-
   /**
    * Create a visual legend inside the specified element based off of a
    * Chart.js dataset.
@@ -280,7 +253,6 @@ function getSessionDuration(ids){
       return '<li><i style="background:' + color + '"></i>' + label + '</li>';
     }).join('');
   }
-
 
   // Set some global Chart.js defaults.
   Chart.defaults.global.animationSteps = 60;
@@ -301,7 +273,6 @@ function getSessionDuration(ids){
 
     getSessionDuration(ids);
 
-
     // Render all the of charts for this view.
     renderDayOfWeekChart(ids);
 
@@ -309,6 +280,5 @@ function getSessionDuration(ids){
 
    // Render the view selector to the page.
   viewSelector.execute();
-
 
 });

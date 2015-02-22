@@ -1,3 +1,6 @@
+<link href="css/dashboard-style.css" rel="stylesheet">
+
+<!-- Linking JavaScipt files here -->
 <script src="js/vendor/jquery.1.11.min.js"></script>
 <script>
 (function(w,d,s,g,js,fs){
@@ -12,10 +15,20 @@
 <script src="js/vendor/active-users.js"></script>
 <script src="js/analytics.js"></script>
 
+<!-- Authorization banner -->
+<aside class="Header-auth">
+  <div class="Header-embedApi">
+    <div class="gapi-analytics-auth-styles-signinbutton gapi-analytics-auth-styles-signinbutton:hover" title="Access Google Analytics">
+      <span id="embed-api-auth-container"></span>
+    </div>
+  </div>
+  <span class="Header-logout">
+    <a href="https://accounts.google.com/logout"><strong>Log Out</strong></a>
+  </span>
+</aside>
 
-    <!-- Authorization don't touch -->
-    <div id="embed-api-auth-container"></div>
-    
+    <!-- Selectors -->
+    <div id="view-selector-container"></div>
 
     <!-- Charts -->
     <div id="active-users-container"></div>
@@ -26,7 +39,7 @@
     <div id="day-of-week-chart2">
         <div id="day-of-week-chart2-legend"></div>
     </div>
-    <!-- Selectors -->
+    
 
-    <div id="view-selector-container"></div>
+    
     

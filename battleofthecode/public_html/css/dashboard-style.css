@@ -1,0 +1,37 @@
+.Header-auth {
+	text-align:center;
+}
+.Header-auth .Header-logout {
+	background-color:blue;
+	display:block;
+	width:auto;
+}
+
+.Header-auth a {
+	background-color:blue;
+	text-decoration:none;
+	border-radius: 4px;	
+	border: 1px solid gray;
+	font-size: 12;
+	font-family: Arial;
+	color:white;
+	padding: 5px;
+}
+
+.Header-auth .gapi-analytics-auth-styles-signinbutton {
+	background:#f7991c;
+	display:block;
+	padding:1em 1.5em;
+	-webkit-transition:background-color .2s cubic-bezier(.4,0,.2,1);
+	transition:background-color .2s cubic-bezier(.4,0,.2,1);
+	width: auto;
+}
+
+.Header-auth .gapi-analytics-auth-styles-signinbutton:hover {
+	background:#f05721;
+	cursor:pointer
+}
+
+ .Header-logout a:hover {
+	background-color:#f7991c;
+}
