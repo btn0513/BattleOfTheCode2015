@@ -1,59 +1,41 @@
 
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-        <script type="text/javascript" src="js/gmap/demo.js"></script>
 
 <section id="gmap" class="row">
         <div class="col-full">
-            <h2>google map</h2>
+            <h2>Map of Lichen geocaches</h2>
         </div>
-        <ul data-role="listview" data-inset="true">
-                <li ><a href="#">Main-Location 1 </a></li>
-                <li ><a href="#">Main-Location 2 </a></li>
-                <li ><a href="#">Main-Location 3 </a></li>
-            </ul>
-        <div class="container_16">
-        <article class="grid_16">
-            <div class="item rounded dark">
-
-                <div id="map_canvas" class="map rounded" style="width:100%; height:300px;"></div>
-            </div>
-    </div>
+        Search: <input ng-model="query">
+        <ul >
+        <li ng-repeat="locs in mainlocs | filter:query">
+          {{locs.name}}
+          <p>{{locs.info}}</p>
+        </li>
+      </ul>
+             <map center="39.066814,-94.583535" zoom="12">
+        <info-window id="1" position="39.040677,-94.574427" visible="true">
+          <div ng-non-bindable="">
+            The Anita B Gorman Discovery & Conservation Center!<br>
+            LatLng: {{chicago.lat()}}, {{chicago.lng()}}, <br>
+            World Coordinate: {{worldCoordinate.x}}, {{worldCoordinate.y}}, <br>
+            Pixel Coordinate: {{pixelCoordinate.x}}, {{pixelCoordinate.y}}, <br>
+            Tile Coordinate: {{tileCoordinate.x}}, {{tileCoordinate.y}} at Zoom Level {{map.getZoom()}}
+          </div>
+        </info-window>
+        <info-window id="1" position="39.094057,-94.604697" visible="true">
+          <div ng-non-bindable="">
+            Plug Projects!
+          </div>
+        </info-window>
+        <info-window id="1" position="39.085255,-94.586066" visible="true">
+          <div ng-non-bindable="">
+            Union Station & Science City!
+          </div>
+        </info-window>
+        <info-window id="1" position="39.088249,-94.585216" visible="true">
+          <div ng-non-bindable="">
+            The Mid-America Arts Alliance!
+          </div>
+        </info-window>
+                 
+      </map>
 </section>
-    <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'YOUR_GOOGLE_ANALYTICS_ID', 'auto');
-            ga('send', 'pageview');
-        </script>
-        <!-- AN -->
-        <script type="text/javascript">
-            $(function () {
-                demo.add(function () {
-                    $('#map_canvas').gmap({'center': '39.066814,-94.583535', 'zoom': 12, 'disableDefaultUI': true, 'callback': function () {
-                            var self = this;
-                            self.addMarker({'position': '39.040677,-94.574427'}).click(function () {
-                                self.openInfoWindow({'content': 'The Anita B Gorman Discovery & Conservation Center!'}, this);
-                            });
-                            self.addMarker({'position': '39.094057,-94.604697'}).click(function () {
-                                self.openInfoWindow({'content': 'Plug Projects!'}, this);
-                            });
-                            self.addMarker({'position': '39.085255,-94.586066'}).click(function () {
-                                self.openInfoWindow({'content': 'Union Station & Science City!'}, this);
-                            });
-                            self.addMarker({'position': '39.088249,-94.585216'}).click(function () {
-                                self.openInfoWindow({'content': 'The Mid-America Arts Alliance!'}, this);
-                            });
-                        }});
-                }).load();
-            });
-        </script>
-        <!-- AN -->
