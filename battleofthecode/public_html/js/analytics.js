@@ -12,7 +12,12 @@ gapi.analytics.ready(function() {
       clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
     });
   }
+  authorize();
 
+
+  $('.btn-group input').on('click', function () {
+    alert("dfasfs");
+  })
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
@@ -240,19 +245,18 @@ function getSessionDuration(ids){
 
 
       $.each(labels,function(key,value){
-          if(key%2 === 0){
-            labels[key] = "";
-          }
-          else{
+          // if(key%2 === 0){
+          //   labels[key] = "";
+          // }
+          // else{
             var num = value;
             var string = value.toString();
             var date = moment(string,"YYYYMMDD");
             labels[key]= date.format('MM/DD');
 
-          }
+          // }
       });
 
-      console.log("labels",labels);
 
       $.each(data1,function(key,value){
 
@@ -289,8 +293,8 @@ function getSessionDuration(ids){
         ]
       };
 
-      new Chart(makeCanvas('userType-chart')).Line(data);
-      //generateLegend('day-of-week-chart2-legend', data.datasets);
+      new Chart(makeCanvas('userType-chart')).Line(data)
+      .generateLegend('userType-chart-legend', data.datasets);
     })
     .catch(function(err) {
       console.error(err.stack);

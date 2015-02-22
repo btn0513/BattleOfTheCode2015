@@ -1,7 +1,7 @@
 <link href="css/dashboard-style.css" rel="stylesheet">
 
 <!-- Linking JavaScipt files here -->
-<script src="js/vendor/jquery.1.11.min.js"></script>
+
 <script>
 (function(w,d,s,g,js,fs){
   g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
@@ -10,8 +10,11 @@
   fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
 }(window,document,'script'));
 </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="js/vendor/Chart.min.js"></script>
 <script src="js/vendor/moment.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="js/vendor/active-users.js"></script>
 <script src="js/analytics.js"></script>
 
@@ -26,7 +29,23 @@
     <a href="https://accounts.google.com/logout"><strong>Log Out</strong></a>
   </span>
 </aside>
-    
+
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="option1" autocomplete="off" value="1" >Daily
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" id="option2" autocomplete="off" value="7">Weekly
+      </label>
+      <label class="btn btn-primary active">
+        <input type="radio" name="options" id="option3" autocomplete="off" value="30" checked>Monthly
+      </label>
+    </div>
+
+    <div>
+        <label>Date Range:</label>
+        <input id="dateRange" type="text">
+    </div>
     <!-- Selectors -->
     <div id="view-selector-container"></div>
 
@@ -36,10 +55,10 @@
     <div id="users-chart-container"></div>
     <div id="pageviews-chart-container"></div>
     <div id="userType-chart"></div>
+    <div id="userType-chart-legend"></div>
     <div id="day-of-week-chart"></div>
-    <div id="day-of-week-chart2">
-        <div id="day-of-week-chart2-legend"></div>
-    </div>
+    <div id="day-of-week-chart2"></div>
+    <div id="day-of-week-chart2-legend"></div>
     
 
     
