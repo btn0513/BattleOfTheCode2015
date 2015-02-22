@@ -1,0 +1,32 @@
+<script src="js/vendor/jquery.1.11.min.js"></script>
+<script>
+(function(w,d,s,g,js,fs){
+  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+  js.src='https://apis.google.com/js/platform.js';
+  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+}(window,document,'script'));
+</script>
+<script src="js/vendor/Chart.min.js"></script>
+<script src="js/vendor/moment.min.js"></script>
+<script src="js/vendor/active-users.js"></script>
+<script src="js/analytics.js"></script>
+
+
+    <!-- Authorization don't touch -->
+    <div id="embed-api-auth-container"></div>
+    
+
+    <!-- Charts -->
+    <div id="active-users-container"></div>
+    <div id="average-session-container"></div>
+    <div id="users-chart-container"></div>
+    <div id="pageviews-chart-container"></div>
+    <div id="day-of-week-chart"></div>
+    <div id="day-of-week-chart2">
+        <div id="day-of-week-chart2-legend"></div>
+    </div>
+    <!-- Selectors -->
+
+    <div id="view-selector-container"></div>
+    
