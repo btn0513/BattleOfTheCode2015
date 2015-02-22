@@ -1,5 +1,9 @@
 gapi.analytics.ready(function() {
 
+  // Add a state class to the body when auth is successful.
+  gapi.analytics.auth.on('success', function() {
+    document.getElementById("Site").classList.add('is-authorized');  
+  });
   /**
    * Authorize the user immediately if the user has already granted access.
    * If no access has been created, render an authorize button inside the
@@ -12,8 +16,12 @@ gapi.analytics.ready(function() {
       clientid: '1013683663006-1o8kcbql9th40p04h9g8uoteqtng3924.apps.googleusercontent.com',
     });
   }
-
   authorize();
+
+
+  $('.btn-group input').on('click', function () {
+    alert("dfasfs");
+  })
 
   /**
    * Create a new ViewSelector instance to be rendered inside of an
@@ -32,7 +40,6 @@ gapi.analytics.ready(function() {
     container: 'active-users-container',
     pollingInterval: 5
   });
-
 
   /**
    * Add CSS animation to visually show the when users come and go.
@@ -53,10 +60,6 @@ gapi.analytics.ready(function() {
       }, 3000);
     });
   });
-
-
-
-
 
   /**
    * Create a new DataChart instance with the given query parameters
@@ -79,13 +82,7 @@ gapi.analytics.ready(function() {
     }
   });
 
-
-
-
-
   /*************************Page Views Chart*****************************/
-
-
 
   /**
    * Create a new DataChart instance with the given query parameters
@@ -107,7 +104,6 @@ gapi.analytics.ready(function() {
       }
     }
   });
-
 
    /*************************Days of the Week Chart*****************************/
     /**
@@ -131,8 +127,6 @@ gapi.analytics.ready(function() {
     }
   });
 
-
-
   //Query for average session duration
 function getSessionDuration(ids){
     var now = moment();
@@ -144,7 +138,6 @@ function getSessionDuration(ids){
         'end-date': moment(now).format('YYYY-MM-DD')
       });
 
-
       Promise.all([queryData]).then(function(results){
         var duration = 0;
 
@@ -152,9 +145,6 @@ function getSessionDuration(ids){
           $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
 
         data1 = results[0].rows.map(function(row) { return +row[0]; });
-
-        
-
 
         try{
           data1[0] === undefined ? duration = 0 : duration = data1[0];
@@ -169,10 +159,7 @@ function getSessionDuration(ids){
           $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
         }
 
-        
       });
-
-      
 
   }
 
@@ -194,8 +181,6 @@ function getSessionDuration(ids){
       'start-date':'30daysAgo',
       'end-date': moment(now).format('YYYY-MM-DD')
     });
-
-
 
     Promise.all([queryData]).then(function(results) {
       var data1 = results[0].rows.map(function(row) { return +row[1]; });
@@ -222,13 +207,103 @@ function getSessionDuration(ids){
       };
 
       new Chart(makeCanvas('day-of-week-chart')).Bar(data);
-      generateLegend('day-of-week-chart2-legend', data.datasets);
+      generateLegend('day-of-week-chart-legend', data.datasets);
     })
     .catch(function(err) {
       console.error(err.stack);
     })
   }
 
+  /**
+   * Draw the a chart.js bar chart with data from the specified view that
+   * overlays session data for the current year over session data for the
+   * previous year, grouped by month.
+   */
+  function renderUserTypeChart(ids) {
+
+    // Adjust `now` to experiment with different days, for testing only...
+    var now = moment(); // .subtract(3, 'day');
+
+    var queryData = query({
+      'ids': ids,
+      'dimensions': 'ga:date',
+      'metrics': 'ga:users',
+      //'start-date': moment(now).date(1).month(0).format('YYYY-MM-DD'),
+      'start-date':'30daysAgo',
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    var queryData2 = query({
+      'ids': ids,
+      'dimensions': 'ga:date',
+      'metrics': 'ga:newUsers',
+      'start-date':'30daysAgo',
+      'end-date': moment(now).format('YYYY-MM-DD')
+    });
+
+    Promise.all([queryData,queryData2]).then(function(results) {
+      var data1 = results[0].rows.map(function(row) { return +row[1]; });
+      var data2 = results[1].rows.map(function(row) { return +row[1]; });
+
+      var labels = results[1].rows.map(function(row) { return +row[0]; });
+
+
+      $.each(labels,function(key,value){
+          // if(key%2 === 0){
+          //   labels[key] = "";
+          // }
+          // else{
+            var num = value;
+            var string = value.toString();
+            var date = moment(string,"YYYYMMDD");
+            labels[key]= date.format('MM/DD');
+
+          // }
+      });
+
+
+      $.each(data1,function(key,value){
+
+        data1[key] = this - data2[key];
+      });
+
+      // Ensure the data arrays are at least as long as the labels array.
+      // Chart.js bar charts don't (yet) accept sparse datasets.
+      for (var i = 0, len = labels.length; i < len; i++) {
+        if (data1[i] === undefined) data1[i] = null;
+      }
+      
+            
+
+      var data = {
+        labels : labels,
+        datasets : [
+          {
+            label: 'Returning Users',
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            data : data1
+          },
+          {
+            label: 'New Users',
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            data : data2
+          }
+        ]
+      };
+
+      new Chart(makeCanvas('userType-chart')).Line(data);
+      generateLegend('userType-chart-legend', data.datasets);
+    })
+    .catch(function(err) {
+      console.error(err.stack);
+    })
+  }
 
   /**
    * Extend the Embed APIs `gapi.analytics.report.Data` component to
@@ -244,7 +319,6 @@ function getSessionDuration(ids){
           .execute();
     });
   }
-
 
   /**
    * Create a new canvas inside the specified element. Set it to be the width
@@ -265,7 +339,6 @@ function getSessionDuration(ids){
     return ctx;
   }
 
-
   /**
    * Create a visual legend inside the specified element based off of a
    * Chart.js dataset.
@@ -281,7 +354,6 @@ function getSessionDuration(ids){
     }).join('');
   }
 
-
   // Set some global Chart.js defaults.
   Chart.defaults.global.animationSteps = 60;
   Chart.defaults.global.animationEasing = 'easeInOutQuart';
@@ -294,21 +366,20 @@ function getSessionDuration(ids){
   viewSelector.on('change', function(ids) {
     dataChart.set({query: {ids: ids}}).execute();
     pageViewsData.set({query: {ids: ids}}).execute();
-    dwData.set({query: {ids: ids}}).execute();
+    //dwData.set({query: {ids: ids}}).execute();
 
     // Start tracking active users for this view.
     activeUsers.set({ids: ids}).execute();
 
     getSessionDuration(ids);
 
-
     // Render all the of charts for this view.
     renderDayOfWeekChart(ids);
+    renderUserTypeChart(ids);
 
   });
 
    // Render the view selector to the page.
   viewSelector.execute();
-
 
 });
