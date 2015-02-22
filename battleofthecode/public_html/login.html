@@ -1,46 +1,16 @@
 
-        <!--div >
+<script>
+    
+    </script>
+        <div >
             
-            <input id="signinbtn" type="submit" value="Sign in!">
-            <input id="signupbtn" type="submit" value="Sign up!">
 
-            <div id="loginform">
-                <label> Email: <input type="text" ng-model="email"/></label><br>
+            <form action="actions.php" method="POST" id="loginform">
+                <label> Email: <input type="text" name="email" ng-model="email"/></label><br>
                 <label> Password: <input type="password" name="password" /></label><br>
                 <input id="loginbtn" type="submit" value="Log in">
                 <input id="registerbtn" type="submit" value="Register">
-            </div>
+            </form>
             <div id="mssg">
-{{name}}
             </div>
-        </div-->
-        
-        
-        
-        <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <!--Sidebar content-->
-
-      Search: <input ng-model="query">
-      Sort by:
-      <select ng-model="orderProp">
-        <option value="name">Alphabetical</option>
-        <option value="age">Newest</option>
-      </select>
-
-    </div>
-    <div class="col-md-10">
-      <!--Body content-->
-
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
-          <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-</div>
+        </div>
