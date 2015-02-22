@@ -81,6 +81,8 @@ gapi.analytics.ready(function() {
 
 
 
+
+
   /*************************Page Views Chart*****************************/
 
 
@@ -107,6 +109,7 @@ gapi.analytics.ready(function() {
   });
 
 
+   /*************************Days of the Week Chart*****************************/
     /**
    * Create a new DataChart instance with the given query parameters
    * and Google chart options. It will be rendered inside an element
@@ -127,6 +130,51 @@ gapi.analytics.ready(function() {
       }
     }
   });
+
+
+
+  //Query for average session duration
+function getSessionDuration(ids){
+    var now = moment();
+    var data1;
+    queryData =  query({
+        'ids': ids,
+        'metrics':'ga:avgSessionDuration',
+        'start-date':'30daysAgo',
+        'end-date': moment(now).format('YYYY-MM-DD')
+      });
+
+
+      Promise.all([queryData]).then(function(results){
+        var duration = 0;
+
+        if(results[0].totalResults === 0)
+          $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
+
+        data1 = results[0].rows.map(function(row) { return +row[0]; });
+
+        
+
+
+        try{
+          data1[0] === undefined ? duration = 0 : duration = data1[0];
+          if(duration>0) duration = duration.toFixed(3);
+        }
+        catch(err){
+
+          duration = 0;
+          
+        }
+        finally{
+          $("#average-session-container").html("Average Session Duration: <b class=''>"+duration+"</b>");
+        }
+
+        
+      });
+
+      
+
+  }
 
   /**
    * Draw the a chart.js bar chart with data from the specified view that
@@ -240,7 +288,6 @@ gapi.analytics.ready(function() {
   Chart.defaults.global.responsive = true;
   Chart.defaults.global.maintainAspectRatio = true;
 
-  
   /**
    * Render the dataChart on the page whenever a new view is selected.
    */
@@ -252,6 +299,7 @@ gapi.analytics.ready(function() {
     // Start tracking active users for this view.
     activeUsers.set({ids: ids}).execute();
 
+    getSessionDuration(ids);
 
 
     // Render all the of charts for this view.
